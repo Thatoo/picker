@@ -56,7 +56,9 @@ function editShare(shareId, permission) {
 			})
 		} else {
 			console.debug('[picker main] after edit, there is NO webex app => setShareUrl')
-			window.location = publicLinkUrl
+			navigator.clipboard.writeText(publicLinkUrl);
+			this.open = false;
+//			window.location = publicLinkUrl
 		}
 	}).catch((error) => {
 		console.debug(error)
