@@ -44,12 +44,20 @@
 						{{ t('picker', 'Cancel') }}
 					</NcButton>
 					<NcButton type="primary"
-						@click="onValidate">
+						@click="onOpen">
+						<template #icon>
+							<CheckIcon
+									:size="20" />
+						</template>
+						{{ t('picker', 'Open file') }}
+					</NcButton>
+					<NcButton type="primary"
+						@click="onCopy">
 						<template #icon>
 							<CheckIcon
 								:size="20" />
 						</template>
-						{{ t('picker', 'Start collaborating') }}
+						{{ t('picker', 'Copy link file') }}
 					</NcButton>
 				</div>
 			</div>
@@ -139,9 +147,13 @@ export default {
 			this.open = false
 			this.$emit('closed')
 		},
-		onValidate() {
+		onOpen() {
 			this.open = false
-			this.$emit('validate', this.filePath, this.selectedPermission)
+			this.$emit('open', this.filePath, this.selectedPermission)
+		},
+		onCopy() {
+			this.open = false
+			this.$emit('copy', this.filePath, this.selectedPermission)
 		},
 	},
 }

@@ -33,7 +33,7 @@ if (window.Webex?.Application) {
 	console.debug('[picker main] No webex app')
 }
 
-function editShare(shareId, permission) {
+function editShare(shareId, permission, action) {
 	const url = generateOcsUrl('/apps/files_sharing/api/v1/shares/{shareId}', { shareId })
 	const req = {
 		permissions: permission === 'write' ? 3 : undefined,
@@ -55,10 +55,24 @@ function editShare(shareId, permission) {
 				console.error(error)
 			})
 		} else {
-			console.debug('[picker main] after edit, there is NO webex app => setShareUrl')
-			navigator.clipboard.writeText(publicLinkUrl);
-			this.open = false;
-//			window.location = publicLinkUrl
+			if (action === 'open') {
+				console.debug('[picker main] after edit, there is NO webex app => setShareUrl')
+				window.location = publicLinkUrl
+		} else {
+			console.debug('[picker main] after edit, there is NO webex app => copyShareLink')
+			navigator.clipboard.writeText(publicLinkUrl)
+				this.open = false
+				// window.opener.location.reload()
+				// window.close()
+				// opener.close.value = 'closing'
+				// opener.postMessage('closing')
+				// openFilePicker()
+				// window.returnValue = true
+				// const by_window = window.open('', '_blank')
+				// setTimeout(function(){ by_window.close() }, 5000)
+				return false
+		}
+
 		}
 	}).catch((error) => {
 		console.debug(error)
@@ -66,7 +80,7 @@ function editShare(shareId, permission) {
 	})
 }
 
-function createPublicLink(path, permission) {
+function createPublicLink(path, permission, action) {
 	const url = generateOcsUrl('/apps/files_sharing/api/v1/shares')
 	const req = {
 		path,
@@ -76,7 +90,7 @@ function createPublicLink(path, permission) {
 	axios.post(url, req).then((response) => {
 		console.debug('ADD SUCCESS', response.data?.ocs?.data)
 		const shareId = response.data?.ocs?.data?.id
-		editShare(shareId, permission)
+		editShare(shareId, permission, action)
 	}).catch((error) => {
 		console.error(error)
 		showError(t('picker', 'Error while creating the shared access'))
@@ -118,9 +132,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		openFilePicker()
 	})
 
-	permVue.$on('validate', (filePath, permission) => {
-		createPublicLink(filePath, permission)
-	})
+	permVue.$on('open', (filePath, permission) => {
+		createPublicLink(filePath, permission, 'open')
+})
+
+	permVue.$on('copy', (filePath, permission) => {
+		createPublicLink(filePath, permission, 'copy')
+})
 
 	openFilePicker()
 })
