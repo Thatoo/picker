@@ -61,16 +61,16 @@ function editShare(shareId, permission, action) {
 			} else {
 				console.debug('[picker main] after edit, there is NO webex app => copyShareLink')
 				navigator.clipboard.writeText(publicLinkUrl)
-					this.open = false
-					// window.opener.location.reload()
-					// window.close()
-					// opener.close.value = 'closing'
-					// opener.postMessage('closing')
-					// openFilePicker()
-					// window.returnValue = true
-					// const by_window = window.open('', '_blank')
-					// setTimeout(function(){ by_window.close() }, 5000)
-					return false
+				this.open = false
+				// window.opener.location.reload()
+				// window.close()
+				// opener.close.value = 'closing'
+				// opener.postMessage('closing')
+				// openFilePicker()
+				// window.returnValue = true
+				// const by_window = window.open('', '_blank')
+				// setTimeout(function(){ by_window.close() }, 5000)
+				return false
 			}
 		}
 	}).catch((error) => {
