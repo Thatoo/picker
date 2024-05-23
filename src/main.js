@@ -58,21 +58,20 @@ function editShare(shareId, permission, action) {
 			if (action === 'open') {
 				console.debug('[picker main] after edit, there is NO webex app => setShareUrl')
 				window.location = publicLinkUrl
-		} else {
-			console.debug('[picker main] after edit, there is NO webex app => copyShareLink')
-			navigator.clipboard.writeText(publicLinkUrl)
-				this.open = false
-				// window.opener.location.reload()
-				// window.close()
-				// opener.close.value = 'closing'
-				// opener.postMessage('closing')
-				// openFilePicker()
-				// window.returnValue = true
-				// const by_window = window.open('', '_blank')
-				// setTimeout(function(){ by_window.close() }, 5000)
-				return false
-		}
-
+			} else {
+				console.debug('[picker main] after edit, there is NO webex app => copyShareLink')
+				navigator.clipboard.writeText(publicLinkUrl)
+					this.open = false
+					// window.opener.location.reload()
+					// window.close()
+					// opener.close.value = 'closing'
+					// opener.postMessage('closing')
+					// openFilePicker()
+					// window.returnValue = true
+					// const by_window = window.open('', '_blank')
+					// setTimeout(function(){ by_window.close() }, 5000)
+					return false
+			}
 		}
 	}).catch((error) => {
 		console.debug(error)
@@ -134,11 +133,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 	permVue.$on('open', (filePath, permission) => {
 		createPublicLink(filePath, permission, 'open')
-})
+	})
 
 	permVue.$on('copy', (filePath, permission) => {
 		createPublicLink(filePath, permission, 'copy')
-})
+	})
 
 	openFilePicker()
 })

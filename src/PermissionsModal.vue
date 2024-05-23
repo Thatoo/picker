@@ -47,7 +47,7 @@
 						@click="onOpen">
 						<template #icon>
 							<CheckIcon
-									:size="20" />
+								:size="20" />
 						</template>
 						{{ t('picker', 'Open file') }}
 					</NcButton>
