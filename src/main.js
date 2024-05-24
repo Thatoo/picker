@@ -34,7 +34,7 @@ if (window.Webex?.Application) {
 }
 
 function editShare(shareId, permission, action) {
-	console.log(action)
+	console.log('action is', action)
 	const url = generateOcsUrl('/apps/files_sharing/api/v1/shares/{shareId}', { shareId })
 	const req = {
 		permissions: permission === 'write' ? 3 : undefined,
