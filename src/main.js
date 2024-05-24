@@ -55,33 +55,31 @@ function editShare(shareId, permission, action) {
 			}).catch((error) => {
 				console.error(error)
 			})
-		} else {
-			if (action === 'copy') {
-				console.debug('[picker main] after edit, there is NO webex app => setShareUrl')
-				window.location = publicLinkUrl
-			} else if (action === 'open') {
-				console.debug('[picker main] after edit, there is NO webex app => copyShareLink')
-				// navigator.clipboard.writeText(publicLinkUrl)
-				// const sendDataButton = document.getElementById('sendDataButton')
-				// const pickerData = 'Picker can be closed'
-				// sendDataButton.addEventListener('click', () => {
-				// Send the data to the parent window
-				// const url = generateOcsUrl('/apps/picker/single-link')
-				// console.debug('[picker main] url is ', url)
-				// window.opener.postMessage('Picker can be closed', '/nextcloud/apps/picker/single-link')
-				// });
-				// this.open = false
-				// window.opener.location.reload()
-				// window.close()
-				// opener.close.value = 'closing'
-				// opener.postMessage('closing')
-				// openFilePicker()
-				// window.returnValue = true
-				// const by_window = window.open('', '_blank')
-				// setTimeout(function(){ by_window.close() }, 5000)
-				// return false
-				window.location = publicLinkUrl
-			}
+		} else if (action === 'copy') {
+			console.debug('[picker main] after edit, there is NO webex app => setShareUrl')
+			window.location = publicLinkUrl
+		} else if (action === 'open') {
+			console.debug('[picker main] after edit, there is NO webex app => copyShareLink')
+			// navigator.clipboard.writeText(publicLinkUrl)
+			// const sendDataButton = document.getElementById('sendDataButton')
+			// const pickerData = 'Picker can be closed'
+			// sendDataButton.addEventListener('click', () => {
+			// Send the data to the parent window
+			// const url = generateOcsUrl('/apps/picker/single-link')
+			// console.debug('[picker main] url is ', url)
+			// window.opener.postMessage('Picker can be closed', '/nextcloud/apps/picker/single-link')
+			// });
+			// this.open = false
+			// window.opener.location.reload()
+			// window.close()
+			// opener.close.value = 'closing'
+			// opener.postMessage('closing')
+			// openFilePicker()
+			// window.returnValue = true
+			// const by_window = window.open('', '_blank')
+			// setTimeout(function(){ by_window.close() }, 5000)
+			// return false
+			window.location = publicLinkUrl
 		}
 	}).catch((error) => {
 		console.debug(error)
