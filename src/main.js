@@ -34,7 +34,7 @@ if (window.Webex?.Application) {
 }
 
 function editShare(shareId, permission, action) {
-	console.debug('action is', action)
+	console.log('action is', action)
 	const url = generateOcsUrl('/apps/files_sharing/api/v1/shares/{shareId}', { shareId })
 	const req = {
 		permissions: permission === 'write' ? 3 : undefined,
@@ -56,10 +56,10 @@ function editShare(shareId, permission, action) {
 				console.error(error)
 			})
 		} else if (action === 'copy') {
-			console.debug('[picker main] after edit, there is NO webex app => setShareUrl')
+			console.log('[picker main] after edit, there is NO webex app => setShareUrl')
 			window.location = publicLinkUrl
 		} else if (action === 'open') {
-			console.debug('[picker main] after edit, there is NO webex app => copyShareLink')
+			console.log('[picker main] after edit, there is NO webex app => copyShareLink')
 			// navigator.clipboard.writeText(publicLinkUrl)
 			// const sendDataButton = document.getElementById('sendDataButton')
 			// const pickerData = 'Picker can be closed'
@@ -95,7 +95,7 @@ function createPublicLink(path, permission, action) {
 		label: '[P] ' + t('picker', 'Picker link') + ' ' + moment().format('YYYY-MM-DD HH:mm:ss'),
 	}
 	axios.post(url, req).then((response) => {
-		console.debug('ADD SUCCESS', response.data?.ocs?.data)
+		console.debug('ADD SUCCESS', response.data?.ocs?.data, action, permission)
 		const shareId = response.data?.ocs?.data?.id
 		editShare(shareId, permission, action)
 	}).catch((error) => {
