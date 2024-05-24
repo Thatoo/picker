@@ -34,6 +34,7 @@ if (window.Webex?.Application) {
 }
 
 function editShare(shareId, permission, action) {
+	console.debug('action is', action)
 	const url = generateOcsUrl('/apps/files_sharing/api/v1/shares/{shareId}', { shareId })
 	const req = {
 		permissions: permission === 'write' ? 3 : undefined,
@@ -58,10 +59,18 @@ function editShare(shareId, permission, action) {
 			if (action === 'open') {
 				console.debug('[picker main] after edit, there is NO webex app => setShareUrl')
 				window.location = publicLinkUrl
-			} else {
+			} else if (action === 'copy') {
 				console.debug('[picker main] after edit, there is NO webex app => copyShareLink')
-				navigator.clipboard.writeText(publicLinkUrl)
-				this.open = false
+				// navigator.clipboard.writeText(publicLinkUrl)
+				// const sendDataButton = document.getElementById('sendDataButton')
+				// const pickerData = 'Picker can be closed'
+				// sendDataButton.addEventListener('click', () => {
+				// Send the data to the parent window
+				// const url = generateOcsUrl('/apps/picker/single-link')
+				// console.debug('[picker main] url is ', url)
+				// window.opener.postMessage('Picker can be closed', '/nextcloud/apps/picker/single-link')
+				// });
+				// this.open = false
 				// window.opener.location.reload()
 				// window.close()
 				// opener.close.value = 'closing'
@@ -70,7 +79,8 @@ function editShare(shareId, permission, action) {
 				// window.returnValue = true
 				// const by_window = window.open('', '_blank')
 				// setTimeout(function(){ by_window.close() }, 5000)
-				return false
+				// return false
+				window.location = publicLinkUrl
 			}
 		}
 	}).catch((error) => {
