@@ -58,7 +58,7 @@ function editShare(shareId, permission, action) {
 		} else if (action === 'copy') {
 			console.log('[picker main] after edit, there is NO webex app => setShareUrl')
 			window.location = publicLinkUrl
-		} else if (action === 'open') {
+		} else {
 			console.log('[picker main] after edit, there is NO webex app => copyShareLink')
 			// navigator.clipboard.writeText(publicLinkUrl)
 			// const sendDataButton = document.getElementById('sendDataButton')
