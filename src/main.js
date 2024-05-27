@@ -55,12 +55,12 @@ function editShare(shareId, permission, action) {
 			}).catch((error) => {
 				console.error(error)
 			})
-		} else if (action === 'copy') {
+		} else if (action === 'open') {
 			console.log('[picker main] after edit, there is NO webex app => setShareUrl')
 			window.location = publicLinkUrl
 		} else {
 			console.log('[picker main] after edit, there is NO webex app => copyShareLink')
-			// navigator.clipboard.writeText(publicLinkUrl)
+			navigator.clipboard.writeText(publicLinkUrl)
 			// const sendDataButton = document.getElementById('sendDataButton')
 			// const pickerData = 'Picker can be closed'
 			// sendDataButton.addEventListener('click', () => {
@@ -79,7 +79,7 @@ function editShare(shareId, permission, action) {
 			// const by_window = window.open('', '_blank')
 			// setTimeout(function(){ by_window.close() }, 5000)
 			// return false
-			window.location = publicLinkUrl
+			// window.location = publicLinkUrl
 		}
 	}).catch((error) => {
 		console.debug(error)
