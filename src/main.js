@@ -34,7 +34,7 @@ if (window.Webex?.Application) {
 }
 
 function editShare(shareId, permission, action) {
-	console.log('action is', action)
+	console.debug('action is', action)
 	const url = generateOcsUrl('/apps/files_sharing/api/v1/shares/{shareId}', { shareId })
 	const req = {
 		permissions: permission === 'write' ? 3 : undefined,
@@ -56,10 +56,10 @@ function editShare(shareId, permission, action) {
 				console.error(error)
 			})
 		} else if (action === 'open') {
-			console.log('[picker main] after edit, there is NO webex app => setShareUrl')
+			console.debug('[picker main] after edit, there is NO webex app => setShareUrl')
 			window.location = publicLinkUrl
 		} else {
-			console.log('[picker main] after edit, there is NO webex app => copyShareLink')
+			console.debug('[picker main] after edit, there is NO webex app => copyShareLink')
 			navigator.clipboard.writeText(publicLinkUrl)
 			// const sendDataButton = document.getElementById('sendDataButton')
 			// const pickerData = 'Picker can be closed'
