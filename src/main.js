@@ -60,7 +60,9 @@ function editShare(shareId, permission, action) {
 			window.location = publicLinkUrl
 		} else {
 			console.debug('[picker main] after edit, there is NO webex app => copyShareLink')
-			navigator.clipboard.writeText(publicLinkUrl)
+			navigator.clipboard.writeText(publicLinkUrl).then(() => {
+				console.debug('Link copied to clipboard successfully');
+			})
 			// const sendDataButton = document.getElementById('sendDataButton')
 			// const pickerData = 'Picker can be closed'
 			// sendDataButton.addEventListener('click', () => {
