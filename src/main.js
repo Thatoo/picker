@@ -67,7 +67,7 @@ function editShare(shareId, permission, action) {
 			// Send the data to the parent window
 			// const url = generateOcsUrl('/apps/picker/single-link')
 			// console.debug('[picker main] url is ', url)
-			// window.opener.postMessage('Picker can be closed', '/nextcloud/apps/picker/single-link')
+			window.opener.postMessage('Picker can be closed', '/nextcloud/apps/picker/single-link')
 			// });
 			// this.open = false
 			// window.opener.location.reload()
