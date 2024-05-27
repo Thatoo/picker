@@ -61,7 +61,7 @@ function editShare(shareId, permission, action) {
 		} else {
 			console.debug('[picker main] after edit, there is NO webex app => copyShareLink')
 			navigator.clipboard.writeText(publicLinkUrl).then(() => {
-				console.debug('Link copied to clipboard successfully');
+				console.debug('Link copied to clipboard successfully')
 			})
 			// const sendDataButton = document.getElementById('sendDataButton')
 			// const pickerData = 'Picker can be closed'
@@ -70,7 +70,7 @@ function editShare(shareId, permission, action) {
 			// const url = generateOcsUrl('/apps/picker/single-link')
 			// console.debug('[picker main] url is ', url)
 			window.opener.postMessage('Picker can be closed', '/nextcloud/apps/picker/single-link').then(() => {
-				console.debug('Message sent successfully');
+				console.debug('Message sent successfully')
 			})
 			// });
 			// this.open = false
