@@ -199,7 +199,11 @@ export function openFilePickerClipboardOnly() {
 	const filePicker = getFilePickerBuilder(t('picker', 'Choose a file to share a link to it'))
 		.allowDirectories(true)
 		.setMultiSelect(false)
-		.addButton(undefined)
+		.addButton({
+			label: 'Read Only public share link',
+			callback: (nodes) => console.log('Picked', nodes),
+			type: 'primary',
+		})
 		.build()
 	filePicker.pick()
 }
@@ -209,9 +213,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	const urlParams = new URLSearchParams(queryString)
 	const option = urlParams.get('option')
 	if (option === 'ClipboardOnly') {
-		// console.debug('Option', option, 'has been choosen')
-		// openFilePickerClipboardOnly()
-		Vue.component('main', ClipboardVue)
+		console.debug('Option', option, 'has been choosen')
+		openFilePickerClipboardOnly()
+		//Vue.component('main', ClipboardVue)
 	} else {
 		const View = Vue.extend(PermissionsModal)
 		permVue = new View().$mount('#picker')

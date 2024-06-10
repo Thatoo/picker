@@ -7,6 +7,7 @@
 <script>
 import { FilePickerVue as FilePicker } from '@nextcloud/dialogs/filepicker.js'
 import InternalIcon from 'vue-material-design-icons/OpenInNew.vue'
+import Vue from 'vue'
 export default {
 	name: 'Clipboard',
 	components: {
