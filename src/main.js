@@ -10,6 +10,7 @@ import moment from '@nextcloud/moment'
 import * as webdav from 'webdav'
 import memoize from 'lodash/fp/memoize.js'
 import { getCurrentUser } from '@nextcloud/auth'
+import InternalIcon from 'vue-material-design-icons/OpenInNew.vue'
 import '../css/main.scss'
 export const getClient = memoize((service) => {
 	// Add this so the server knows it is a request from the browser
@@ -194,7 +195,6 @@ function openFilePicker() {
 }
 
 function openFilePickerClipboardOnly() {
-	import InternalIcon from 'vue-material-design-icons/OpenInNew.vue'
 	getFilePickerBuilder(t('picker', 'Choose a file to share a link to it'))
     .setMultiSelect(false)
 	.allowDirectories()
