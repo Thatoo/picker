@@ -195,9 +195,9 @@ function openFilePicker() {
 }
 
 function openFilePickerClipboardOnly() {
-	getFilePickerBuilder(t('picker', 'Choose a file to share a link to it'))
+	const filePicker = getFilePickerBuilder(t('picker', 'Choose a file to share a link to it'))
+		.allowDirectories(true)
 		.setMultiSelect(false)
-		.allowDirectories()
 		.addButton({
 			label: 'Read Only public share link',
 			callback: (file) => {
@@ -207,7 +207,7 @@ function openFilePickerClipboardOnly() {
 			icon: InternalIcon,
 		})
 		.build()
-		.pick()
+	filePicker.pick()
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
