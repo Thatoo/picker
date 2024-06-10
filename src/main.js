@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import './bootstrap.js'
 import PermissionsModal from './PermissionsModal.vue'
-import ClipboardVue from './Clipboard.vue'
+// import ClipboardVue from './Clipboard.vue'
 
 import { generateOcsUrl, generateUrl, generateRemoteUrl } from '@nextcloud/router'
 import { dirname } from '@nextcloud/paths'
@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	if (option === 'ClipboardOnly') {
 		console.debug('Option', option, 'has been choosen')
 		openFilePickerClipboardOnly()
-		//Vue.component('main', ClipboardVue)
+		// Vue.component('main', ClipboardVue)
 	} else {
 		const View = Vue.extend(PermissionsModal)
 		permVue = new View().$mount('#picker')
