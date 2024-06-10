@@ -198,14 +198,7 @@ export function openFilePickerClipboardOnly() {
 	const filePicker = getFilePickerBuilder(t('picker', 'Choose a file to share a link to it'))
 		.allowDirectories(true)
 		.setMultiSelect(false)
-		.addButton({
-			label: 'Read Only public share link',
-			callback: (file) => {
-				console.debug('Picked', file, 'and choose Read Only')
-			},
-			type: 'primary',
-			icon: InternalIcon,
-		})
+		.setType(1)
 		.build()
 	filePicker.pick()
 }
