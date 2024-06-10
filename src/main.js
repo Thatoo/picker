@@ -196,35 +196,35 @@ function openFilePicker() {
 
 function openFilePickerClipboardOnly() {
 	getFilePickerBuilder(t('picker', 'Choose a file to share a link to it'))
-    .setMultiSelect(false)
-	.allowDirectories()
-    .addButton({
-        label: 'Read Only public share link',
-        callback: (file) => {
-			console.debug('Picked', file, 'and choose Read Only')
-			createPublicLink(file[0].path, 'read', 'copy')
+		.setMultiSelect(false)
+		.allowDirectories()
+		.addButton({
+			label: 'Read Only public share link',
+			callback: (file) => {
+				console.debug('Picked', file, 'and choose Read Only')
+				createPublicLink(file[0].path, 'read', 'copy')
+			},
+			type: 'primary',
 		},
-		type: 'primary',
-    },
-	{
-		label: 'Editable public share link',
-		callback: (file) => {
-			console.debug('Picked', file, 'and choose Editable')
-			createPublicLink(file[0].path, 'write', 'copy')
+		{
+			label: 'Editable public share link',
+			callback: (file) => {
+				console.debug('Picked', file, 'and choose Editable')
+				createPublicLink(file[0].path, 'write', 'copy')
+			},
+			type: 'primary',
 		},
-		type: 'primary',
-	},
-	{
-        label: 'Internal link',
-        callback: (file) => {
-			console.debug('Picked', file, 'and choose Internal link')
-			createPublicLink(file[0].path, 'internal', 'copy')
-		},
-		type: 'secondary',
-		icon: InternalIcon,
-	})
-    .build()
-	.pick()
+		{
+			label: 'Internal link',
+			callback: (file) => {
+				console.debug('Picked', file, 'and choose Internal link')
+				createPublicLink(file[0].path, 'internal', 'copy')
+			},
+			type: 'secondary',
+			icon: InternalIcon,
+		})
+		.build()
+		.pick()
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
