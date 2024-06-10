@@ -194,7 +194,8 @@ function openFilePicker() {
 }
 
 function openFilePickerClipboardOnly() {
-	const filepicker = getFilePickerBuilder(t('picker', 'Choose a file to share a link to it'))
+	import InternalIcon from 'vue-material-design-icons/OpenInNew.vue'
+	getFilePickerBuilder(t('picker', 'Choose a file to share a link to it'))
     .setMultiSelect(false)
 	.allowDirectories()
     .addButton({
@@ -218,9 +219,9 @@ function openFilePickerClipboardOnly() {
         callback: (file) => {
 			console.debug('Picked', file, 'and choose Internal link')
 			createPublicLink(file[0].path, 'internal', 'copy')
-		}
+		},
 		type: 'secondary',
-		icon: IconShare,
+		icon: InternalIcon,
 	})
     .build()
 	.pick()
