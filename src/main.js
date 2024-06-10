@@ -4,13 +4,12 @@ import PermissionsModal from './PermissionsModal.vue'
 
 import { generateOcsUrl, generateUrl, generateRemoteUrl } from '@nextcloud/router'
 import { dirname } from '@nextcloud/paths'
-import { showError } from '@nextcloud/dialogs'
+import { showError, getFilePickerBuilder } from '@nextcloud/dialogs'
 import axios from '@nextcloud/axios'
 import moment from '@nextcloud/moment'
 import * as webdav from 'webdav'
 import memoize from 'lodash/fp/memoize.js'
 import { getCurrentUser } from '@nextcloud/auth'
-import { FilePickerVue as FilePicker, type IFilePickerButton } from '@nextcloud/dialogs/filepicker.js'
 import '../css/main.scss'
 export const getClient = memoize((service) => {
 	// Add this so the server knows it is a request from the browser
@@ -195,26 +194,23 @@ function openFilePicker() {
 }
 
 function openFilePickerClipboardOnly() {
-	const buttons: IFilePickerButton[] = [
-		{
-		  label: 'Pick',
-		  callback: (nodes: Node[]) => console.log('Picked', nodes),
-		  type: 'primary'
-		},
-		{
-		  label: 'Share',
-		  callback: (nodes: Node[]) => console.log('Share picked files', nodes),
-		  type: 'secondary',
-		  icon: IconShare,
-		}
-	  ]
-	OC.dialogs.filepicker(
-		t('picker', 'Choose a file and start collaborating'),
-		(targetPath) => {
-			onFileSelected(targetPath)
-		},
-		false, null, true, buttons, lastPath
-	)
+	const filepicker = getFilePickerBuilder('Pick plain text files')
+    .addMimeTypeFilter('text/plain')
+    .addButton({
+        label: 'Pick',
+        callback: (nodes) => console.log('Picked', nodes),
+		type: 'primary',
+    },
+	{
+        label: 'Share',
+        callback: (nodes) => console.log('Picked', nodes),
+		type: 'secondary',
+		icon: IconShare,
+	})
+    .build()
+
+	// You get the file nodes by the button callback, but also the pick yields the paths of the picked files
+	const paths = await filepicker.pick()
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
