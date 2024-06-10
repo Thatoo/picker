@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	if (option === 'ClipboardOnly') {
 		// console.debug('Option', option, 'has been choosen')
 		// openFilePickerClipboardOnly()
-		Vue.component('FilePicker', ClipboardVue)
+		Vue.component('main', ClipboardVue)
 	} else {
 		const View = Vue.extend(PermissionsModal)
 		permVue = new View().$mount('#picker')
