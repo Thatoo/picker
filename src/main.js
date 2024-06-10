@@ -202,26 +202,8 @@ function openFilePickerClipboardOnly() {
 			label: 'Read Only public share link',
 			callback: (file) => {
 				console.debug('Picked', file, 'and choose Read Only')
-				createPublicLink(file[0].path, 'read', 'copy')
 			},
 			type: 'primary',
-		},
-		{
-			label: 'Editable public share link',
-			callback: (file) => {
-				console.debug('Picked', file, 'and choose Editable')
-				createPublicLink(file[0].path, 'write', 'copy')
-			},
-			type: 'primary',
-		},
-		{
-			label: 'Internal link',
-			callback: (file) => {
-				console.debug('Picked', file, 'and choose Internal link')
-				createPublicLink(file[0].path, 'internal', 'copy')
-			},
-			type: 'secondary',
-			icon: InternalIcon,
 		})
 		.build()
 		.pick()
