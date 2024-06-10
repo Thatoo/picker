@@ -194,23 +194,36 @@ function openFilePicker() {
 }
 
 function openFilePickerClipboardOnly() {
-	const filepicker = getFilePickerBuilder('Pick plain text files')
-    .addMimeTypeFilter('text/plain')
+	const filepicker = getFilePickerBuilder(t('picker', 'Choose a file to share a link to it'))
+    .setMultiSelect(false)
+	.allowDirectories()
     .addButton({
-        label: 'Pick',
-        callback: (nodes) => console.log('Picked', nodes),
+        label: 'Read Only public share link',
+        callback: (file) => {
+			console.debug('Picked', file, 'and choose Read Only')
+			createPublicLink(file[0].path, 'read', 'copy')
+		},
 		type: 'primary',
     },
 	{
-        label: 'Share',
-        callback: (nodes) => console.log('Picked', nodes),
+		label: 'Editable public share link',
+		callback: (file) => {
+			console.debug('Picked', file, 'and choose Editable')
+			createPublicLink(file[0].path, 'write', 'copy')
+		},
+		type: 'primary',
+	},
+	{
+        label: 'Internal link',
+        callback: (file) => {
+			console.debug('Picked', file, 'and choose Internal link')
+			createPublicLink(file[0].path, 'internal', 'copy')
+		}
 		type: 'secondary',
 		icon: IconShare,
 	})
     .build()
-
-	// You get the file nodes by the button callback, but also the pick yields the paths of the picked files
-	const paths = await filepicker.pick()
+	.pick()
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
