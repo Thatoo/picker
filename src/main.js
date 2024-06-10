@@ -193,28 +193,59 @@ function openFilePicker() {
 	)
 }
 
+function openFilePickerClipboardOnly() {
+	const buttons: IFilePickerButton[] = [
+		{
+		  label: 'Pick',
+		  callback: (nodes: Node[]) => console.log('Picked', nodes),
+		  type: 'primary'
+		},
+		{
+		  label: 'Share',
+		  callback: (nodes: Node[]) => console.log('Share picked files', nodes),
+		  type: 'secondary',
+		  icon: IconShare,
+		}
+	  ]
+	OC.dialogs.filepicker(
+		t('picker', 'Choose a file and start collaborating'),
+		(targetPath) => {
+			onFileSelected(targetPath)
+		},
+		false, null, true, buttons, lastPath
+	)
+}
+
 document.addEventListener('DOMContentLoaded', (event) => {
-	const View = Vue.extend(PermissionsModal)
-	permVue = new View().$mount('#picker')
-	permVue.$on('closed', () => {
+	const queryString = window.location.search
+	const urlParams = new URLSearchParams(queryString)
+	const option = urlParams.get('option')
+	if (option === 'ClipboardOnly') {
+		console.debug('Option', option, 'has been choosen')
+		openFilePickerClipboardOnly()
+	} else {
+		const View = Vue.extend(PermissionsModal)
+		permVue = new View().$mount('#picker')
+		permVue.$on('closed', () => {
+			openFilePicker()
+		})
+
+		permVue.$on('open', (filePath, permission) => {
+			if (permission === 'internal') {
+				getInternalLink(filePath, 'open')
+			} else {
+				createPublicLink(filePath, permission, 'open')
+			}
+		})
+
+		permVue.$on('copy', (filePath, permission) => {
+			if (permission === 'internal') {
+				getInternalLink(filePath, 'copy')
+			} else {
+				createPublicLink(filePath, permission, 'copy')
+			}
+		})
+
 		openFilePicker()
-	})
-
-	permVue.$on('open', (filePath, permission) => {
-		if (permission === 'internal') {
-			getInternalLink(filePath, 'open')
-		} else {
-			createPublicLink(filePath, permission, 'open')
-		}
-	})
-
-	permVue.$on('copy', (filePath, permission) => {
-		if (permission === 'internal') {
-			getInternalLink(filePath, 'copy')
-		} else {
-			createPublicLink(filePath, permission, 'copy')
-		}
-	})
-
-	openFilePicker()
+	}
 })
