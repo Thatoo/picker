@@ -199,7 +199,6 @@ export function openFilePickerClipboardOnly() {
 	const filePicker = getFilePickerBuilder(t('picker', 'Choose a file to share a link to it'))
 		.allowDirectories(true)
 		.setMultiSelect(false)
-		.setType(4)
 		.build()
 	filePicker.pick()
 }
