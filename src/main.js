@@ -202,7 +202,6 @@ export function openFilePickerClipboardOnly() {
 		.addButton({
 			label: 'Read Only public share link',
 			callback: (nodes) => console.log('Picked', nodes),
-			type: 'primary',
 		})
 		.build()
 	filePicker.pick()
